@@ -14,5 +14,8 @@ export default [
   {
     title: 'Coach',
     url: '/coach'
+  },{
+  title:'prueba',
+    url:'/'
   }
 ];

@@ -1,35 +1,70 @@
+//dependnecies
 import React ,{Component} from 'react';
 
+//imports
+import Field from './components/Field';
+import Button from './components/Button';
+
 class Contact extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      phone: '',
+      name: '',
+      message: '',
+
+    };
+    //To ensure 'this' when calling 'this._updateField' refers to form and not field, we do:
+    this._updateField = this._updateField.bind(this);
+  }
+
+  //Fiel could be 'name contact','phone','message' adn 'email,
+  //values is whatever the user types into the input field
+  _updateField(field,value){
+    this.setState({
+      [field]: value
+    });
+  };
   render(){
     return(
-      <div className={"container"}>
-        <br/>
-        <form>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Enter email"/>
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.
-              </small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
-          </div>
-          <div className="form-check">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value=""/>
-                Option one is this
-                <span className="form-check-sign">
-              <span className="check"></span>
-          </span>
-            </label>
-          </div>
 
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+      <div className={"container"}>
+        <br/><br/>
+
+        <h1>Contacto US</h1>
+        <div className={"card"}>
+          {/* name contact field*/}
+          <Field onChange={(event)=> this._updateField('name', event.target.value)}
+                 value={this.state.name}
+                 label={"Name"}
+          />
+          {/* phone contact field*/}
+          <Field onChange={(event)=> this._updateField('phone', event.target.value)}
+                 value={this.state.phone}
+                 label={"phone"}
+          />
+          {/*  message contact*/}
+          <Field onChange={(event)=> this._updateField('message', event.target.value)}
+            /*this shoul be written like 'textarea'
+            * */
+                 textarea={true}
+                 value={this.state.message}
+                 label={"message"}
+          />
+          {/* emali contact field*/}
+          <Field onChange={(event)=> this._updateField('email', event.target.value)}
+                 value={this.state.email}
+                 label={"email"}
+          />
+          {/* submit button*/}
+          <Button formValues={this.state} email={"mprado@mosbit.com"}/>
+
+        </div>
+        <br/><br/>
+
       </div>
+
     );
   }
 
